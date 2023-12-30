@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html class="black">
     <head>
         <meta charset="utf-8">
         <title>AIspeakin Real-Time Interpretation</title>
@@ -8,640 +8,290 @@
         <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
         <style type="text/css">
-            hr {
-                margin-top: 10px;
-                margin-bottom: 10px;
+            :root {
+                --header-height: 64px;
+                --footer-height: 136px;
             }
-            .sideBar-body .message-count {
-                position: absolute;
-                /*top: 8px;
-                left: 5px;*/
-                top:-5px;
-                left:-5px;
-                width: 20px;
-                height: 20px;
-                line-height: 20px;
-                text-align: center;
-                background-color: #ff9e2a;
-                border-radius: 50%;
-                color: #fff;
-                font-weight: 600;
-                font-size: 10px;
-                z-index: 10;
-            }
-            
-            .sideBar-body .message-count[count="0"] {
-                display:none;
-            }
-            
-            .last-message-content {
-                white-space: nowrap;
+            html, body, div, span {
+                height: 100%;
+                width: 100%;
                 overflow: hidden;
-                text-overflow: ellipsis;
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
             }
-            
-            html,
-            body,
-            div,
-            span {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
+            body.black {
+                background: #000;
             }
-            
-            body {
-            background: url("https://www.bootdey.com/img/bgy.png") no-repeat fixed center;
-            background-size: cover;
+            body.purple {
+                background: linear-gradient(45deg, #B9FFFE, #B7C3FF 25%, #B7B3FF);
             }
-            
-            .fa-2x {
-            font-size: 1.5em;
+            body > div {
+                position: relative;
             }
-            
-            .app {
-            position: relative;
-            overflow: hidden;
-            top: 19px;
-            height: calc(100% - 38px);
-            margin: auto;
-            padding: 0;
-            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .06), 0 2px 5px 0 rgba(0, 0, 0, .2);
-            }
-            
-            .app-one {
-            background-color: #f7f7f7;
-            height: 100%;
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
-            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .06), 0 2px 5px 0 rgba(0, 0, 0, .2);
-            }
-            
-            .side {
-            padding: 0;
-            margin: 0;
-            height: 100%;
-            }
-            .side-one {
-            padding: 0;
-            margin: 0;
-            height: 100%;
-            width: 100%;
-            z-index: 1;
-            position: relative;
-            display: block;
-            top: 0;
-            }
-            
-            .side-two {
-            padding: 0;
-            margin: 0;
-            height: 100%;
-            width: 100%;
-            z-index: 2;
-            position: relative;
-            top: -100%;
-            left: -100%;
-            -webkit-transition: left 0.3s ease;
-            transition: left 0.3s ease;
-            
-            }
-            
-            
-            .heading {
-            padding: 10px 16px 10px 15px;
-            margin: 0;
-            height: 60px;
-            width: 100%;
-            background-color: #eee;
-            z-index: 1000;
-            }
-            
-            .heading-avatar {
-            padding: 0;
-            cursor: pointer;
-            
-            }
-            
-            .heading-avatar-icon img {
-            border-radius: 50%;
-            height: 40px;
-            width: 40px;
-            }
-            
-            .heading-name {
-            padding: 0 !important;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            }
-            
-            .heading-name-meta {
-            font-weight: 700;
-            font-size: 100%;
-            padding: 5px;
-            padding-bottom: 0;
-            text-align: left;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            color: #000;
-            display: flex;
-            align-items: center;
-            }
-            .heading-online {
-            display: none;
-            padding: 0 5px;
-            font-size: 12px;
-            color: #93918f;
-            }
-            .heading-compose {
-            padding: 0;
-            }
-            
-            .heading-compose i {
-            text-align: center;
-            padding: 5px;
-            color: #93918f;
-            cursor: pointer;
-            }
-            
-            .heading-dot {
-            padding: 0;
-            /*margin-left: 10px;*/
-            }
-            
-            .heading-dot i {
-            text-align: right;
-            padding: 5px;
-            color: #93918f;
-            cursor: pointer;
-            }
-            
-            .searchBox {
-            padding: 0 !important;
-            margin: 0 !important;
-            height: 60px;
-            width: 100%;
-            }
-            
-            .searchBox-inner {
-            height: 100%;
-            width: 100%;
-            padding: 10px !important;
-            background-color: #fbfbfb;
-            }
-            
-            
-            /*#searchBox-inner input {
-            box-shadow: none;
-            }*/
-            
-            .searchBox-inner input:focus {
-            outline: none;
-            border: none;
-            box-shadow: none;
-            }
-            
-            .sideBar {
-            padding: 0 !important;
-            margin: 0 !important;
-            background-color: #fff;
-            overflow-y: auto;
-            border: 1px solid #f7f7f7;
-            height: calc(100% - 120px);
-            }
-            
-            .sideBar-body {
-            position: relative;
-            padding: 10px !important;
-            border-bottom: 1px solid #f7f7f7;
-            height: 72px;
-            margin: 0 !important;
-            cursor: pointer;
-            }
-            
-            .sideBar-body:hover {
-            background-color: #f2f2f2;
-            }
-            
-            .sideBar-body.current {
-            background-color: #d1d1d1;
-            }
-            
-            .sideBar-avatar {
-            text-align: center;
-            padding: 0 !important;
-            }
-            
-            .avatar-icon img {
-            border-radius: 50%;
-            height: 49px;
-            width: 49px;
-            }
-            
-            .sideBar-main {
-            padding: 0 !important;
-            }
-            
-            .sideBar-main .row {
-            padding: 0 !important;
-            margin: 0 !important;
-            }
-            
-            .sideBar-name {
-            padding: 10px !important;
-            }
-            
-            .name-meta {
-            font-size: 100%;
-            /*padding: 1% !important;*/
-            text-align: left;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            color: #000;
-            display:block;
-            height:auto;
-            }
-            
-            .sideBar-time {
-            padding: 10px !important;
-            }
-            
-            .time-meta {
-            text-align: right;
-            font-size: 12px;
-            padding: 1% !important;
-            color: rgba(0, 0, 0, .4);
-            vertical-align: baseline;
-            }
-            
-            /*New Message*/
-            
-            .newMessage {
-            padding: 0 !important;
-            margin: 0 !important;
-            height: 100%;
-            position: relative;
-            left: -100%;
-            }
-            .newMessage-heading {
-            padding: 10px 16px 10px 15px !important;
-            margin: 0 !important;
-            height: 100px;
-            width: 100%;
-            background-color: #00bfa5;
-            z-index: 1001;
-            }
-            
-            .newMessage-main {
-            padding: 10px 16px 0 15px !important;
-            margin: 0 !important;
-            height: 60px;
-            margin-top: 30px !important;
-            width: 100%;
-            z-index: 1001;
-            color: #fff;
-            }
-            
-            .newMessage-title {
-            font-size: 18px;
-            font-weight: 700;
-            padding: 10px 5px !important;
-            }
-            .newMessage-back {
-            text-align: center;
-            vertical-align: baseline;
-            padding: 12px 5px !important;
-            display: block;
-            cursor: pointer;
-            }
-            .newMessage-back i {
-            margin: auto !important;
-            }
-            
-            .composeBox {
-            padding: 0 !important;
-            margin: 0 !important;
-            height: 60px;
-            width: 100%;
-            }
-            
-            .composeBox-inner {
-            height: 100%;
-            width: 100%;
-            padding: 10px !important;
-            background-color: #fbfbfb;
-            }
-            
-            .composeBox-inner input:focus {
-            outline: none;
-            border: none;
-            box-shadow: none;
-            }
-            
-            .compose-sideBar {
-            padding: 0 !important;
-            margin: 0 !important;
-            background-color: #fff;
-            overflow-y: auto;
-            border: 1px solid #f7f7f7;
-            height: calc(100% - 160px);
-            }
-            
-            /*Conversation*/
-            
-            .conversation {
-            padding: 0 !important;
-            margin: 0 !important;
-            height: 100%;
-            /*width: 100%;*/
-            border-left: 1px solid rgba(0, 0, 0, .08);
-            /*overflow-y: auto;*/
-            }
-            
-            .message {
-            padding: 0 !important;
-            margin: 0 !important;
-            /*background: no-repeat fixed center;
-            background-size: cover;*/
-            overflow-y: auto;
-            border: 1px solid #f7f7f7;
-            height: calc(100% - 120px);
-            background-color: rgb(243,240,247);
-            }
-            .message-previous {
-            margin : 0 !important;
-            padding: 0 !important;
-            height: auto;
-            width: 100%;
-            }
-            .previous {
-            font-size: 15px;
-            text-align: center;
-            padding: 10px !important;
-            cursor: pointer;
-            }
-            
-            .previous a {
-            text-decoration: none;
-            font-weight: 700;
-            }
-            
-            .message-body {
-            margin: 0 0 5px !important;
-            padding: 0 !important;
-            width: auto;
-            height: auto;
-            }
-            
-            .message-main-receiver {
-            /*padding: 10px 20px;*/
-            float:left;
-            max-width: 45%;
-            transform: rotate(180deg) scaleY(-1);
-            }
-            
-            .message-main-sender {
-            /*padding: 3px 20px !important;
-            margin-left: 40% !important;*/
-            float:right;
-            max-width: 45%;
-            }
-            
-            .message-text {
-            margin: 0 !important;
-            padding: 5px !important;
-            word-wrap:break-word;
-            font-weight: 200;
-            font-size: 20px;
-            padding-bottom: 0 !important;
+            body > div::before  {
+                content: "";
+
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+
+                background-image: url("bg.png");
+                background-size: contain;
+                background-position: 0% 50%;
+                background-repeat: no-repeat;
+                opacity: 50%;
             }
 
-            .message-text .trans-text {
-                color: rgb(75,179,192);
-                font-weight: bold;
-            }
-            
-            .message-time {
-            margin: 5px 0 0 !important;
-            margin-left: 50px !important;
-            font-size: 12px;
-            text-align: right;
-            color: #9a9a9a;
-            
-            }
-            
-            .receiver {
-            width: auto !important;
-            padding: 4px 10px 7px !important;
-            border-radius: 10px 10px 10px 0;
-            background: #ffffff;
-            font-size: 12px;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-            word-wrap: break-word;
-            display: inline-block;
-            }
-            
-            .sender {
-            float: right;
-            width: auto !important;
-            background: white;/*#dcf8c6;*/
-            border-radius: 10px 10px 10px 0;
-            padding: 4px 10px 7px !important;
-            font-size: 12px;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-            display: inline-block;
-            word-wrap: break-word;
-            }
-            
-            
-            /*Reply*/
-            
-            .reply {
-            height: 60px;
-            width: 100%;
-            background-color: #f5f1ee;
-            padding: 10px 5px 10px 5px !important;
-            margin: 0 !important;
-            z-index: 1000;
-            }
-            
-            .reply-emojis {
-            padding: 5px !important;
-            }
-            
-            .reply-emojis i {
-            text-align: center;
-            padding: 5px 5px 5px 5px !important;
-            color: #93918f;
-            cursor: pointer;
-            }
-            
-            .reply-recording {
-            padding: 5px !important;
-            }
-            
-            .reply-recording i {
-            text-align: center;
-            padding: 5px !important;
-            color: #93918f;
-            cursor: pointer;
-            }
-            
-            .reply-send {
-            padding: 5px !important;
-            }
-            
-            .reply-send i {
-            text-align: center;
-            padding: 5px !important;
-            /*color: #93918f;*/
-            cursor: pointer;
-            line-height: 1.5em;
-            }
-            
-            .reply-main {
-            padding: 2px 5px !important;
-            }
-            
-            .reply-main textarea {
-            width: 100%;
-            resize: none;
-            overflow: hidden;
-            padding: 5px !important;
-            outline: none;
-            border: none;
-            text-indent: 5px;
-            box-shadow: none;
-            height: 100%;
-            font-size: 16px;
-            }
-            
-            .reply-main textarea:focus {
-            outline: none;
-            border: none;
-            text-indent: 5px;
-            box-shadow: none;
-            }
-            
-            @media screen and (max-width: 700px) {
             .app {
-                top: 0;
                 height: 100%;
+                padding: 0;
+            }
+            .app-one {
+                margin: 0px;
+            }
+
+            .conversation {
+                padding: 0;
             }
             .heading {
-                height: 70px;
-                background-color: #009688;
-            }
-            .fa-2x {
-                font-size: 2.3em !important;
-            }
-            .heading-avatar {
-                padding: 0 !important;
-            }
-            .heading-avatar-icon img {
-                height: 50px;
-                width: 50px;
-            }
-            .heading-compose {
-                padding: 5px !important;
-            }
-            .heading-compose i {
-                color: #fff;
-                cursor: pointer;
-            }
-            .heading-dot {
-                padding: 5px !important;
-                margin-left: 10px !important;
-            }
-            .heading-dot i {
-                color: #fff;
-                cursor: pointer;
-            }
-            .sideBar {
-                height: calc(100% - 130px);
-            }
-            .sideBar-body {
-                height: 80px;
-            }
-            .sideBar-avatar {
-                text-align: left;
-                padding: 0 8px !important;
-            }
-            .avatar-icon img {
-                height: 55px;
-                width: 55px;
-            }
-            .sideBar-main {
-                padding: 0 !important;
-            }
-            .sideBar-main .row {
-                padding: 0 !important;
-                margin: 0 !important;
-            }
-            .sideBar-name {
-                padding: 10px 5px !important;
-            }
-            .name-meta {
-                font-size: 16px;
-                padding: 5% !important;
-            }
-            .sideBar-time {
-                padding: 10px !important;
-            }
-            .time-meta {
-                text-align: right;
-                font-size: 14px;
-                padding: 4% !important;
-                color: rgba(0, 0, 0, .4);
-                vertical-align: baseline;
-            }
-            /*Conversation*/
-            .conversation {
-                padding: 0 !important;
-                margin: 0 !important;
-                height: 100%;
-                /*width: 100%;*/
-                border-left: 1px solid rgba(0, 0, 0, .08);
-                /*overflow-y: auto;*/
+                height: var(--header-height);
+                margin: 0;
             }
             .message {
-                height: calc(100% - 140px);
+                height: calc(100% - var(--header-height) - var(--footer-height));
+                margin: 0;
+
+                overflow: auto;
+            }
+            .message::-webkit-scrollbar {
+                width: 12px;
+                background: transparent;
+            }
+            .message::-webkit-scrollbar-button:single-button {
+                width: 12px;
+                height: 12px;
+                border-style: solid;
+                display: block;
+                background: transparent;
+            }
+            .message::-webkit-scrollbar-button:single-button:vertical:increment {
+                border-width: 10px 6px 0 6px;
+            }
+            .message::-webkit-scrollbar-button:single-button:vertical:decrement {
+                border-width: 0 6px 10px 6px;
+            }
+            body.black .message::-webkit-scrollbar-thumb {
+                background: #00F3FF;
+            }
+            body.black .message::-webkit-scrollbar-button:single-button:vertical:increment {
+                border-color: #00F3FF transparent transparent transparent;
+            }
+            body.black .message::-webkit-scrollbar-button:single-button:vertical:decrement {
+                border-color: transparent transparent #00F3FF transparent;
+            }
+            body.purple .message::-webkit-scrollbar-thumb {
+                background: #6A6BD7;
+            }
+            body.purple .message::-webkit-scrollbar-button:single-button:vertical:increment {
+                border-color: #6A6BD7 transparent transparent transparent;
+            }
+            body.purple .message::-webkit-scrollbar-button:single-button:vertical:decrement {
+                border-color: transparent transparent #6A6BD7 transparent;
             }
             .reply {
-                height: 70px;
+                height: var(--footer-height);
+                margin: 0;
             }
-            .reply-emojis {
-                padding: 5px 0 !important;
+
+            .heading-avatar,
+            .footer-powered-by,
+            .footer-avatar {
+                width: auto;
+                height: auto;
+
+                font-size: 16px;
+                color: #FFF;
             }
-            .reply-emojis i {
-                padding: 5px 2px !important;
-                font-size: 1.8em !important;
+            img.footer-avatar-icon,
+            img.heading-avatar-icon {
+                width: auto;
+                height: 48px;
             }
-            .reply-main {
-                padding: 2px 8px !important;
+            .footer-powered-by {
+                padding: 9px 6px;
+
+                font-size: 24px;
+            } 
+
+            /*New Message*/
+            .message-body {
+                width: auto;
+                margin: 0;
+                margin-bottom: 16px;
             }
-            .reply-main textarea {
-                padding: 8px !important;
-                font-size: 18px;
+            .message-main-sender,
+            .message-main-receiver {
+                width: 50%;
             }
-            .reply-recording {
-                padding: 5px 0 !important;
+            .message-main-sender {
+                padding-right: 15px;
+                padding-left: calc(12.5% - 15px);
+
+                transform: rotate(180deg) scaleY(-1);
             }
-            .reply-recording i {
-                padding: 5px 0 !important;
-                font-size: 1.8em !important;
+            .message-main-receiver {
+                padding-right: calc(12.5% - 15px);
+                padding-left: 15px;
             }
+            .sender,
+            .receiver {
+                width: auto;
+                padding: 16px;
+                border-bottom-right-radius: 16px;
+                border-bottom-left-radius: 16px;
+
+                position: relative;
+                overflow: visible;
+
+                background-color: #FFF;
+            }
+            .sender {
+                float: right;
+                border-top-right-radius: 0 !important;
+                border-top-left-radius: 16px;
+            }
+            .receiver {
+                float: left;
+
+                border-top-right-radius: 16px;
+                border-top-left-radius: 0 !important;
+            }
+            .sender::after,
+            .receiver::after {
+                content: "";
+                width: 0px;
+                height: 0px;
+                border-style: solid;
+
+                display: block;
+                position: absolute;
+                top: 0;
+
+                background: transparent;
+            }
+            .sender::after {
+                border-width: 0 0 16px 16px;
+                border-color: transparent transparent transparent #FFF;
+
+                right: -12px;
+            }
+            .receiver::after {
+                border-width: 0 16px 16px 0;
+                border-color: transparent #FFF transparent transparent;
+
+                left: -12px;
+            }
+
+            .myside .message-main-sender {
+                padding-right: calc(12.5% - 15px);
+                padding-left: 15px;
+            }
+            .myside .message-main-receiver {
+                padding-right: 15px;
+                padding-left: calc(12.5% - 15px);
+            }
+            .myside .sender {
+                float: left;
+                border-top-right-radius: 16px;
+                border-top-left-radius: 0;
+            }
+            .myside .receiver {
+                float: right;
+                border-top-right-radius: 0;
+                border-top-left-radius: 16px;
+            }
+            .myside .sender::after {
+                border-width: 0 16px 16px 0;                
+                border-color: transparent #FFF transparent transparent;
+
+                right: unset;
+                left: -12px;
+            }
+            .myside .receiver::after {
+                border-width: 0 0 16px 16px;
+                border-color: transparent transparent transparent #FFF;
+
+                right: -12px;
+                left: unset;
+            }
+
+            .message-text {
+                margin-bottom: 16px;
+
+                font-size: 20px;
+            }
+            .trans-text {
+                color: #0071BC;
+            }
+            .message-time {
+                color: #666;
+                text-align: right;
+            }
+
+            /*Reply*/
             .reply-send {
-                padding: 5px 0 !important;
+                padding: 8px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
-            .reply-send i {
-                padding: 5px 2px 5px 0 !important;
-                font-size: 1.8em !important;
+            .reply-btn {
+                width: 64px;
+                height: 64px;
+                border: 2px solid #888;
+                border-radius: 50%;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                background-color: #FFF;
+                color: #F00;
+                opacity: 75%;
             }
+
+            .flip {
+                transform: rotate(180deg) scaleY(-1);
+            }
+
+            @media screen and (max-width: 700px) {
+                :root {
+                    --header-height: 48px;
+                    --footer-height: 120px;
+                }
+
+                img.footer-avatar-icon,
+                img.heading-avatar-icon {
+                    width: auto;
+                    height: 32px;
+                }
+
+                .footer-powered-by {
+                    padding: 6px 4px;
+
+                    font-size: 16px;
+                }
+
+                /*New Message*/
+                .sender,
+                .receiver {
+                    padding: 8px;
+                    border-radius: 8px;
+                }
             }
             .ai-cover {
                 display:none;
@@ -654,79 +304,50 @@
             .ai .ai-cover {
                 display: block;
             }
-            .myside .receiver {
-                float:right;
-                border-radius: 10px 10px 0 10px;
-            }
-            .myside .sender {
-                float: right;
-                border-radius: 10px 10px 0 10px;
-            }
-            .sender {
-                float:left;
-            }
-            .receiver {
-                float: none;
-            }
-        </style>    
+        </style>   
     </head>
-    <body>
+    <body class="purple">
         <div>
-            <div class="container app">
+            <div class="container-fluid app">
                 <div class="row app-one">
                     <div class="col-sm-12 conversation conversation-panel">
                         <div class="row heading">
-                            <div class="col-sm-1 col-md-1 col-xs-1 heading-avatar">
-                            <div class="heading-avatar-icon" style="text-align:center;">
-                                <img src="ubestream_icon.png">
+                            <div class="col-xs-6 flip" style="display: flex; justify-content: flex-end; align-items: center;">
+                                <div class="heading-avatar">
+                                    <img class="heading-avatar-icon" src="AIspeakin.png" alt="AIspeakin">
+                                </div>
                             </div>
-                            </div>
-                            <div class="col-sm-8 col-xs-7 heading-name">
-                            <a class="heading-name-meta">環球睿視 Ubestream
-                            </a>
-                            <span class="heading-online">Online</span>
-                            </div>
-                            <div class="col-sm-1 col-xs-1  heading-dot pull-right">
-                            <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+                            <div class="col-xs-6" style="display: flex; justify-content: flex-end; align-items: center;">
+                                <div class="heading-avatar">
+                                    <img class="heading-avatar-icon" src="AIspeakin.png" alt="AIspeakin">
+                                </div>
                             </div>
                         </div>
                     
-                        <div class="row message-body hide" id="message_body_template">
-                            <div class="col-sm-6 message-main-receiver">
-                                <div class="receiver">
-                                <div class="message-text">
-                                </div>
-                                <span class="message-time pull-right">
-                                </span>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 message-main-sender">
-                                <div class="sender">
-                                <div class="message-text">
-                                </div>
-                                <span class="message-time pull-right">
-                                </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row message" id="conversation-container" style="padding-top:10px !important;">
-                            <div id="conversation" style="background-color:black;min-height:100%;height:auto;position:relative;padding-bottom:10px !important;">
+                        <div class="row message" id="conversation-container" style="padding:10px 0 !important;">
+                            <div id="conversation" class="col-xs-12" style="height: auto;">
                                 <div class="ai-cover"></div>
                                 <div class="row message-body" id="">
-                                    <div class="col-sm-6 message-main-receiver">
-                                        <div class="receiver">
+                                    <div class="col-xs-6 message-main-sender">
+                                        <div class="sender">
                                             <div class="message-text">
-                                                天氣很好
+                                                <div>天氣很好</div>
+                                                <div class="trans-text">
+                                                    The weather is great.
+                                                </div>
                                             </div>
                                             <span class="message-time pull-right">
                                                 2023-11-11 11:11:11
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 message-main-sender">
-                                        <div class="sender">
+                                    <div class="col-xs-6 message-main-receiver">
+                                        <div class="receiver">
                                             <div class="message-text">
-                                                The weather is great
+                                                <div>天氣很好</div>
+                                                <div class="trans-text">
+                                                    The weather is great.
+                                                </div>
                                             </div>
                                             <span class="message-time pull-right">
                                                 2023-11-11 11:11:11
@@ -735,45 +356,57 @@
                                     </div>
                                 </div>
                                 <div class="row message-body myside" id="">
-                                    <div class="col-sm-6 message-main-receiver">
-                                        <div class="receiver">
+                                    <div class="col-xs-6 message-main-sender">
+                                        <div class="sender">
                                             <div class="message-text">
-                                                適合釣魚的日子
+                                                <div>Good day for fishing.</div>
+                                                <div class="trans-text">
+                                                    適合釣魚的日子
+                                                </div>
                                             </div>
                                             <span class="message-time pull-right">
-                                                2023-11-11 11:11:20
+                                                2023-11-11 11:20:11
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 message-main-sender">
-                                        <div class="sender">
+                                    <div class="col-xs-6 message-main-receiver">
+                                        <div class="receiver">
                                             <div class="message-text">
-                                                Good day for fishing
+                                                <div>Good day for fishing.</div>
+                                                <div class="trans-text">
+                                                    適合釣魚的日子
+                                                </div>
                                             </div>
                                             <span class="message-time pull-right">
-                                                2023-11-11 11:11:20
+                                                2023-11-11 11:20:11
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row message-body" id="">
-                                    <div class="col-sm-6 message-main-receiver">
-                                        <div class="receiver">
+                                    <div class="col-xs-6 message-main-sender">
+                                        <div class="sender">
                                             <div class="message-text">
-                                                走吧
+                                                <div>走吧</div>
+                                                <div class="trans-text">
+                                                    Let's go.
+                                                </div>
                                             </div>
                                             <span class="message-time pull-right">
-                                                2023-11-11 11:11:23
+                                                2023-11-11 11:23:11
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 message-main-sender">
-                                        <div class="sender">
+                                    <div class="col-xs-6 message-main-receiver">
+                                        <div class="receiver">
                                             <div class="message-text">
-                                                Let's go
+                                                <div>走吧</div>
+                                                <div class="trans-text">
+                                                    Let's go.
+                                                </div>
                                             </div>
                                             <span class="message-time pull-right">
-                                                2023-11-11 11:11:23
+                                                2023-11-11 11:23:11
                                             </span>
                                         </div>
                                     </div>
@@ -782,17 +415,25 @@
                         </div>
                     
                         <div class="row reply reply-by-me">
-                            <div class="col-sm-3 col-xs-3 reply-send">
-                            </div>
-                            <div class="col-sm-6 col-xs-6 reply-send">
-                                <button id="" type="button" class="btn btn-sm btn-primary reply-btn" style="padding:0;width:100%;display:flex;justify-content:center;align-items:center;">
-                                    <i class="fa-play fas" aria-hidden="true"></i><!--送出-->
+                            <div class="col-xs-12 reply-send" style="height: auto;">
+                                <button type="button" class="reply-btn" style="font-size: 36px;">
+                                    <i class="fa-circle fas" aria-hidden="true"></i><!--送出-->
                                 </button>
-                                <button id="" type="button" class="hide btn btn-sm btn-danger reply-btn" style="padding:0;width:100%;display:flex;justify-content:center;align-items:center;">
+                                <button type="button" class="reply-btn hide" style="font-size: 24px;">
                                     <i class="fa-stop fas" aria-hidden="true"></i>
                                 </button>
                             </div>
-                            <div class="col-sm-3 col-xs-3 reply-send">
+                            <div class="col-xs-6 flip" style="height: auto; display: flex; justify-content: flex-end;">
+                                <div class="footer-powered-by">powered by</div>
+                                <div class="footer-avatar">
+                                    <img class="footer-avatar-icon" src="Ubestream.png" alt="Ubestream">
+                                </div>
+                            </div>
+                            <div class="col-xs-6" style="height: auto; display: flex; justify-content: flex-end;">
+                                <div class="footer-powered-by">powered by</div>
+                                <div class="footer-avatar">
+                                    <img class="footer-avatar-icon" src="Ubestream.png" alt="Ubestream">
+                                </div>
                             </div>
                         </div>
                     </div>
