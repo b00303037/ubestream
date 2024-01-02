@@ -29,7 +29,6 @@
             body > div {
                 position: relative;
             }
-            /* 調整開始 */
             body > div::before  {
                 content: "";
 
@@ -49,7 +48,6 @@
             body.purple > div::before {
                 background-image: url("bg-purple.png");
             }
-            /* 調整結束 */
 
             .app {
                 height: 100%;
@@ -223,6 +221,9 @@
             .reply-btn {
                 width: 64px;
                 height: 64px;
+                /* 調整開始 */
+                padding: 0;
+                /* 調整結束 */
                 border: 2px solid #888;
                 border-radius: 50%;
 
@@ -235,7 +236,9 @@
                 opacity: 75%;
             }
 
-            @media screen and (max-width: 700px) {
+            /* 調整開始 */
+            @media screen and (max-width: 768px) {
+            /* 調整結束 */
                 :root {
                     --header-height: 48px;
                     --footer-height: 120px;
@@ -282,9 +285,7 @@
                         <div class="col-xs-12" style="display: flex; justify-content: flex-end; align-items: center;">
                             <div class="heading-avatar">
                                 <img class="heading-avatar-icon" src="AIspeakin.png" alt="AIspeakin">
-                                <!-- 調整開始 -->
                                 <img class="heading-avatar-icon hide" src="AIspeakin_with_JORJIN.png" alt="AIspeakin_with_JORJIN">
-                                <!-- 調整結束 -->
                             </div>
                         </div>
                     </div>
