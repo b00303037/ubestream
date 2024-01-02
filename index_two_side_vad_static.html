@@ -29,6 +29,7 @@
             body > div {
                 position: relative;
             }
+            /* 調整開始 */
             body > div::before  {
                 content: "";
 
@@ -38,12 +39,17 @@
                 bottom: 0;
                 left: 0;
 
-                background-image: url("bg.png");
                 background-size: contain;
                 background-position: 0% 50%;
                 background-repeat: no-repeat;
-                opacity: 50%;
             }
+            body.black > div::before {
+                background-image: url("bg-black.png");
+            }
+            body.purple > div::before {
+                background-image: url("bg-purple.png");
+            }
+            /* 調整結束 */
 
             .app {
                 height: 100%;
