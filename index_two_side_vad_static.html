@@ -253,23 +253,14 @@
                 justify-content: center;
                 align-items: center;
             }
-            .reply-btn {
+            /* 調整開始 */
+            img.reply-btn {
                 width: 64px;
                 height: 64px;
-                /* 調整開始 */
-                padding: 0;
-                /* 調整結束 */
-                border: 2px solid #888;
-                border-radius: 50%;
 
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                background-color: #FFF;
-                color: #F00;
-                opacity: 75%;
+                cursor: pointer;
             }
+            /* 調整結束 */
 
             .flip {
                 transform: rotate(180deg) scaleY(-1);
@@ -425,12 +416,10 @@
                     
                         <div class="row reply reply-by-me">
                             <div class="col-xs-12 reply-send" style="height: auto;">
-                                <button type="button" class="reply-btn" style="font-size: 36px;">
-                                    <i class="fa-circle fas" aria-hidden="true"></i><!--送出-->
-                                </button>
-                                <button type="button" class="reply-btn hide" style="font-size: 24px;">
-                                    <i class="fa-stop fas" aria-hidden="true"></i>
-                                </button>
+                                 <!-- 調整開始 -->
+                                <img class="reply-btn" src="circle-solid.png" alt="start">
+                                <img class="reply-btn hide" src="stop-solid.png" alt="stop">
+                                <!-- 調整結束 -->
                             </div>
                             <div class="col-xs-6 flip" style="height: auto; display: flex; justify-content: flex-end;">
                                 <div class="footer-powered-by">powered by</div>
