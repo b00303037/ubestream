@@ -200,7 +200,9 @@
             }
 
             .message-text {
-                margin-bottom: 16px;
+                /* 調整開始 */
+                margin-bottom: 0;
+                /* 調整結束 */
 
                 font-size: 20px;
             }
@@ -294,6 +296,11 @@
                     height: 48px;
                 }
             }
+            @media (orientation: landscape) and (max-width: 768px) {
+                .message-text {
+                    font-size: 16px;
+                }
+            }
             /* 調整結束 */
             .ai-cover {
                 display:none;
@@ -326,9 +333,11 @@
                                                 The weather is great.
                                             </div>
                                         </div>
-                                        <div class="message-time pull-right">
+                                        <!-- 調整開始 -->
+                                        <!-- <div class="message-time pull-right">
                                             2023-11-11 11:11:11
-                                        </div>
+                                        </div> -->
+                                        <!-- 調整結束 -->
                                     </div>
                                 </div>
                             </div>
@@ -341,9 +350,11 @@
                                                 適合釣魚的日子
                                             </div>
                                         </div>
-                                        <div class="message-time pull-right">
+                                        <!-- 調整開始 -->
+                                        <!-- <div class="message-time pull-right">
                                             2023-11-11 11:20:11
-                                        </div>
+                                        </div> -->
+                                        <!-- 調整結束 -->
                                     </div>
                                 </div>
                             </div>
@@ -356,9 +367,11 @@
                                                 Let's go.
                                             </div>
                                         </div>
-                                        <div class="message-time pull-right">
+                                        <!-- 調整開始 -->
+                                        <!-- <div class="message-time pull-right">
                                             2023-11-11 11:23:11
-                                        </div>
+                                        </div> -->
+                                        <!-- 調整結束 -->
                                     </div>
                                 </div>
                             </div>
